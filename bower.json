@@ -1,0 +1,11 @@
+{
+  "name": "smartdatanet-reference-seed-project",
+  "description": "Seed App for SmartDataNet Directive",
+  "version": "0.0.0",
+  "homepage": "http://csipiemonte.github.io/yucca-angular-widgets/",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "yucca-angular-widgets":"latest"
+	}
+}

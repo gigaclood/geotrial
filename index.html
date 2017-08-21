@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SmartData Reference Essential Demo</title>
+	<meta charset="utf-8">  <!-- it's important for d3.js -->
+	<link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.min.css">
+	<link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css">
+	<link rel="stylesheet" href="bower_components/yucca-angular-widgets/dist/style/angular-yucca.css">
+
+
+	<script type="text/javascript" src="bower_components/d3/d3.js"></script>
+	<script type="text/javascript" src="bower_components/nvd3/build/nv.d3.min.js"></script>
+	<script type="text/javascript" src="bower_components/leaflet/dist/leaflet.js"></script>
+
+
+	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+	<script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
+	<script type="text/javascript" src="bower_components/stomp-websocket/lib/stomp.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.min.js"></script>
+	<script type="text/javascript" src="bower_components/yucca-angular-widgets/dist/js/angular-yucca.js"></script> 
+
+	<style>
+		body{font-family: sans-serif; font-size: 14px; margin: 0;}
+		.header{background-color: #f7f7f7; padding: 24px; border-bottom: solid 1px #1dbbee; clear: both; overflow:  hidden;}
+		.header h1{float: left;}
+		.header a{display: inline block; float: right; color: #333; text-decoration: none;  margin: 24px;}
+		.header a:hover{color: #1dbbee;}
+		.content{margin: 24px; }
+		.widget-container{margin: 24px 48px;}
+	</style>
+	
+	<script type="text/javascript"> 
+		angular.module('myApp', ['yucca.plugin', 'ngSanitize']).controller('myCtrl', function($scope){
+			
+		})
+	</script>
+  
+</head>
+<body>
+	<header class='header'>
+		<h1>Widget in a non AngularJS website</h1>
+		<a href='https://www.smartdatanet.it/' target='_blank'>Smartdatanet.it</a>
+		<a href='https://userportal.smartdatanet.it/reference/#/widget' target='_blank'>Documentation</a>
+	</header>
+	<div ng-app="myApp" class='content'>
+		<div ng-controller="myCtrl">
+			
+			<div class='widget-container'>
+				<h4>Ipotesi business per year (EUR)</h4>
+				<p>The attribute of the widget are directly write in the html<p>
+  <ng-yucca-dataset-choropleth-map 
+    widget_title='Ipotesi business per year (EUR)' 
+    tenant_code='sandbox' 
+    dataset_code='Provageo_2175' 
+    geojson_url='https://raw.githubusercontent.com/raykyri/world.geo.json/6944334d4402a7f934cd87a7ac6610098c6a98aa/countries.geo.json'
+    geojson_areas_key='name' 
+    dataset_areas_key_column='Cod' 
+    dataset_areas_value_column='Busyear' 
+    area_base_color='#AA2200' 
+    counting_mode='sum' 
+    skip_zero_values='true' 
+    dataset_areas_values_label='Ipotesi business per year (EUR)' 
+    debug='true' 
+   />
+			</div>
+	</div>
+</body>
+</html>
