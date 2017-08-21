@@ -469,7 +469,7 @@ h3.yucca-dataset-multidata-stats-tooltip-header{text-align: center; padding: .5e
 .yucca-dataset-choropleth-map-table .selectable:hover{background-color: #f5f5f5; cursor: pointer;}
 .yucca-dataset-choropleth-map .yucca-dataset-choropleth-map-loading{font-size: 18pt; padding-top: 10%; text-align: center; }
 .yucca-dataset-choropleth-map-toolbar{font-size: 11px; text-align: right; padding: 18px 0 3px 0; float: right;}
-.yucca-dataset-choropleth-map .legend {font-size: 11px; background: rgba(255,255,255, 0.9); box-shadow:0 1px 5px rgba(0,0,0,0.65);; border-radius: 4px; padding: 4px 3px;width: 150px;line-height: 14px;color: #555; }
+.yucca-dataset-choropleth-map .legend {font-size: 11px; background: rgba(255,255,255, 0.9); box-shadow:0 1px 5px rgba(0,0,0,0.65);; border-radius: 4px; padding: 4px 3px;width: 180px;line-height: 14px;color: #555; }
 .yucca-dataset-choropleth-map .legend i {width: 12px;height: 12px;float: left;margin-right: 6px;opacity: 0.7;border-radius: 2px;}
 .yucca-dataset-choropleth-map .info-label{white-space: nowrap;}
 

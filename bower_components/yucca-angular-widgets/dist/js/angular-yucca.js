@@ -3144,7 +3144,8 @@ yuccaWidgetsModule.directive('ngYuccaDatasetChoroplethMap', ['metadataService','
 		                        minValue = geojson_data.features[m].properties.value;
 		                    }
 	                    }
-	
+						maxValue = 2000000;
+						minValue = 500000;
 	                    scope.geojson= {};
 	                    console.debug("geojson_data",geojson_data);
 	                    scope.geojson.data = geojson_data;
@@ -3200,6 +3201,37 @@ yuccaWidgetsModule.directive('ngYuccaDatasetChoroplethMap', ['metadataService','
 
            };
            
+		   
+		
+		
+		   
+		   var createLegend = function(){
+            	 var legendColors = [];
+            	 var legendLabels = [];
+       
+            	 var step = (maxValue - minValue)/6;
+            	 for(var i=0;i<5; i++){
+                	 var percent = -0.9*(i-2);
+                    
+	            	 legendColors.push($yuccaHelpers.render.colorLuminance(areaBaseColor, percent));
+	            	 if(i==0)
+	            		 legendLabels.push("<" + $yuccaHelpers.render.safeNumber(step+minValue, scope.decimalValue, scope.isEuroValue()));
+	            	 else if(i==5-1)
+	            		 legendLabels.push(">" + $yuccaHelpers.render.safeNumber(maxValue-step, scope.decimalValue, scope.isEuroValue()));
+	            	 else
+	            		 legendLabels.push("" + $yuccaHelpers.render.safeNumber(minValue + step*i, scope.decimalValue, scope.isEuroValue()) + " - " + $yuccaHelpers.render.safeNumber(minValue + step*(i+1), scope.decimalValue, scope.isEuroValue()));
+
+            		 
+            	 }
+                 scope.legend =  {
+                         position: legendPosition,
+                         colors: legendColors,
+                         labels: legendLabels
+                     };
+            	 
+             };
+		 
+		   
            var styleChoroplethMap = function(feature) {
               return {fillColor: getChoropletColor(feature.properties.value),weight: mapLineWeight, opacity: mapLineOpacity, color: mapLineDashColor, dashArray: mapLineDashArray,fillOpacity:  mapAreasFillOpacity};
            };
@@ -3244,31 +3276,7 @@ yuccaWidgetsModule.directive('ngYuccaDatasetChoroplethMap', ['metadataService','
                //$scope.selected= null;
              };
              
-             var createLegend = function(){
-            	 var legendColors = [];
-            	 var legendLabels = [];
-       
-            	 var step = (maxValue - minValue)/6;
-            	 for(var i=0;i<5; i++){
-                	 var percent = -0.9*(i-2);
-                    
-	            	 legendColors.push($yuccaHelpers.render.colorLuminance(areaBaseColor, percent));
-	            	 if(i==0)
-	            		 legendLabels.push("<" + $yuccaHelpers.render.safeNumber(step+minValue, scope.decimalValue, scope.isEuroValue()));
-	            	 else if(i==5-1)
-	            		 legendLabels.push(">" + $yuccaHelpers.render.safeNumber(maxValue-step, scope.decimalValue, scope.isEuroValue()));
-	            	 else
-	            		 legendLabels.push("" + $yuccaHelpers.render.safeNumber(minValue + step*i, scope.decimalValue, scope.isEuroValue()) + " - " + $yuccaHelpers.render.safeNumber(minValue + step*(i+1), scope.decimalValue, scope.isEuroValue()));
-
-            		 
-            	 }
-                 scope.legend =  {
-                         position: legendPosition,
-                         colors: legendColors,
-                         labels: legendLabels
-                     };
-            	 
-             };
+             
              
 
         	//loadIds();
