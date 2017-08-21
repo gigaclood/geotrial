@@ -38,7 +38,12 @@
 	
 	<script type="text/javascript"> 
 		angular.module('myApp', ['yucca.plugin', 'ngSanitize']).controller('myCtrl', function($scope){
-			
+			$scope.years= ["ALL","2017","2018","2019","2020","2021"]
+			$scope.update = function(id){
+				id = event.target.id;
+				console.log(id)
+			};
+		
 		})
 		
 		
@@ -57,14 +62,18 @@
 			<div class='widget-container'>
 				<h4>Ipotesi business per year (EUR)</h4>
 				<p>The attribute of the widget are directly write in the html<p>
+<select ng-change="update(x);" ng-model="x">
+<option ng-repeat="x in years">{{x}}</option>
+</select>				
   <ng-yucca-dataset-choropleth-map 
     widget_title='Ipotesi business per year (EUR)' 
     tenant_code='sandbox' 
-    dataset_code='Provageo_2175' 
+    dataset_code='Provageo2_2176' 
     geojson_url='https://raw.githubusercontent.com/raykyri/world.geo.json/6944334d4402a7f934cd87a7ac6610098c6a98aa/countries.geo.json'
     geojson_areas_key='name' 
     dataset_areas_key_column='Cod' 
-    dataset_areas_value_column='Busyear' 
+    dataset_areas_value_column='Vi2017' 
+    dataset_areas_color_column='Group' 
     area_base_color='#AA2200' 
     counting_mode='sum' 
     skip_zero_values='true' 

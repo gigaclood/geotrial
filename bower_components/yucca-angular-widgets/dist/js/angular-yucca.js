@@ -3052,9 +3052,13 @@ yuccaWidgetsModule.directive('ngYuccaDatasetChoroplethMap', ['metadataService','
             var datasetAreasKeyColumn = $yuccaHelpers.attrs.safe(attr.datasetAreasKeyColumn, null);
             var datasetAreasKeyLabel = $yuccaHelpers.attrs.safe(attr.datasetAreasKeyLabel, datasetAreasKeyColumn);
             var datasetAreasValueColumn = $yuccaHelpers.attrs.safe(attr.datasetAreasValueColumn, null);
+			
+			var datasetAreasColorColumn = $yuccaHelpers.attrs.safe(attr.datasetAreasColorColumn, null);
+			
             var datasetAreasValueLabel = $yuccaHelpers.attrs.safe(attr.datasetAreasValueLabel, datasetAreasValueColumn);
             scope.dataKey = datasetAreasKeyColumn;
             scope.dataValue = datasetAreasValueColumn;
+			scope.colorValue = datasetAreasColorColumn;
             var countingMode  = $yuccaHelpers.attrs.safe(attr.countingMode, "count");
 
             
@@ -3129,12 +3133,13 @@ yuccaWidgetsModule.directive('ngYuccaDatasetChoroplethMap', ['metadataService','
 	                        		geojson_data.features[k].properties.value = 0;
 	                        	if(countingMode == "count")
 	                        		geojson_data.features[k].properties.value++;
-	                        	else
-	                        		geojson_data.features[k].properties.value += parseFloat(d[datasetAreasValueColumn]);
+	                        	else if (d[datasetAreasValueColumn]>0)
+	                        		geojson_data.features[k].properties.value = d[datasetAreasColorColumn];
 	                        }
 	                      }
 	                    }
 	                    // compute statistic
+						/*
 	                    for(var m=0; m<geojson_data.features.length; m++){
 		                    scope.tableData.push({"key": geojson_data.features[m].properties[geojsonAreasKey], "value": geojson_data.features[m].properties.value});
 		                    if(geojson_data.features[m].properties.value!=0){
@@ -3144,8 +3149,8 @@ yuccaWidgetsModule.directive('ngYuccaDatasetChoroplethMap', ['metadataService','
 		                        minValue = geojson_data.features[m].properties.value;
 		                    }
 	                    }
-						maxValue = 2000000;
-						minValue = 500000;
+						maxValue = 80000;
+						minValue = 0;*/
 	                    scope.geojson= {};
 	                    console.debug("geojson_data",geojson_data);
 	                    scope.geojson.data = geojson_data;
@@ -3209,20 +3214,33 @@ yuccaWidgetsModule.directive('ngYuccaDatasetChoroplethMap', ['metadataService','
             	 var legendColors = [];
             	 var legendLabels = [];
        
-            	 var step = (maxValue - minValue)/6;
-            	 for(var i=0;i<5; i++){
-                	 var percent = -0.9*(i-2);
+//            	 var step = (maxValue - minValue)/4;
+				 
+//            	 for(var i=0;i<3; i++){
+/*                	 var percent = -1.8*(i-2);
                     
 	            	 legendColors.push($yuccaHelpers.render.colorLuminance(areaBaseColor, percent));
 	            	 if(i==0)
 	            		 legendLabels.push("<" + $yuccaHelpers.render.safeNumber(step+minValue, scope.decimalValue, scope.isEuroValue()));
-	            	 else if(i==5-1)
+	            	 else if(i==3-1)
 	            		 legendLabels.push(">" + $yuccaHelpers.render.safeNumber(maxValue-step, scope.decimalValue, scope.isEuroValue()));
 	            	 else
 	            		 legendLabels.push("" + $yuccaHelpers.render.safeNumber(minValue + step*i, scope.decimalValue, scope.isEuroValue()) + " - " + $yuccaHelpers.render.safeNumber(minValue + step*(i+1), scope.decimalValue, scope.isEuroValue()));
 
             		 
             	 }
+
+*/
+            	 legendColors.push(getChoropletColor("SMALL"));
+           		 legendLabels.push("<=" + $yuccaHelpers.render.safeNumber(10000, scope.decimalValue, scope.isEuroValue()));
+            	 legendColors.push(getChoropletColor("MEDIUM"));
+           		 legendLabels.push("" + $yuccaHelpers.render.safeNumber(10000, scope.decimalValue, scope.isEuroValue())
+								   + " - " +
+								   "" + $yuccaHelpers.render.safeNumber(80000, scope.decimalValue, scope.isEuroValue())
+				 );
+            	 legendColors.push(getChoropletColor("BIG"));
+           		 legendLabels.push(">" + $yuccaHelpers.render.safeNumber(80000, scope.decimalValue, scope.isEuroValue()));
+
                  scope.legend =  {
                          position: legendPosition,
                          colors: legendColors,
@@ -3237,12 +3255,16 @@ yuccaWidgetsModule.directive('ngYuccaDatasetChoroplethMap', ['metadataService','
            };
 
            var getChoropletColor = function(d) {
-               if(skipZeroValues &&  d==0){
+               if(skipZeroValues &&  d == "None"){
                    return "#ddd";
                }
                else {
-                 var percent = -1*((d-minValue)/(maxValue - minValue)-0.5)*1.8;
-                 return $yuccaHelpers.render.colorLuminance(areaBaseColor, percent);
+				 if (d == "SMALL")
+					return $yuccaHelpers.render.colorLuminance(areaBaseColor, -0.8);
+				 if (d == "MEDIUM")
+					return $yuccaHelpers.render.colorLuminance(areaBaseColor, 0);
+				 if (d == "BIG")
+					return $yuccaHelpers.render.colorLuminance(areaBaseColor, 0.8);
                }
                
            };
