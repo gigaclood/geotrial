@@ -3232,14 +3232,17 @@ yuccaWidgetsModule.directive('ngYuccaDatasetChoroplethMap', ['metadataService','
 
 */
             	 legendColors.push(getChoropletColor("SMALL"));
-           		 legendLabels.push("<=" + $yuccaHelpers.render.safeNumber(10000, scope.decimalValue, scope.isEuroValue()));
+           		// legendLabels.push("<=" + $yuccaHelpers.render.safeNumber(10000, scope.decimalValue, scope.isEuroValue()));
+				 legendLabels.push("SMALL");
             	 legendColors.push(getChoropletColor("MEDIUM"));
-           		 legendLabels.push("" + $yuccaHelpers.render.safeNumber(10000, scope.decimalValue, scope.isEuroValue())
+           		/* legendLabels.push("" + $yuccaHelpers.render.safeNumber(10000, scope.decimalValue, scope.isEuroValue())
 								   + " - " +
 								   "" + $yuccaHelpers.render.safeNumber(80000, scope.decimalValue, scope.isEuroValue())
-				 );
+				 );*/
+				 legendLabels.push("MEDIUM");
             	 legendColors.push(getChoropletColor("BIG"));
-           		 legendLabels.push(">" + $yuccaHelpers.render.safeNumber(80000, scope.decimalValue, scope.isEuroValue()));
+           		// legendLabels.push(">" + $yuccaHelpers.render.safeNumber(80000, scope.decimalValue, scope.isEuroValue()));
+				 legendLabels.push("BIG");
 
                  scope.legend =  {
                          position: legendPosition,
@@ -3255,16 +3258,17 @@ yuccaWidgetsModule.directive('ngYuccaDatasetChoroplethMap', ['metadataService','
            };
 
            var getChoropletColor = function(d) {
-               if(skipZeroValues &&  d == "None"){
-                   return "#ddd";
+               if(d == "None"){
+                   return "#FFF";
                }
                else {
 				 if (d == "SMALL")
 					return $yuccaHelpers.render.colorLuminance(areaBaseColor, -0.8);
-				 if (d == "MEDIUM")
+				 else if (d == "MEDIUM")
 					return $yuccaHelpers.render.colorLuminance(areaBaseColor, 0);
-				 if (d == "BIG")
+				 else if (d == "BIG")
 					return $yuccaHelpers.render.colorLuminance(areaBaseColor, 0.8);
+				else return "#FFF";
                }
                
            };

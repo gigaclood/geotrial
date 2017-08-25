@@ -32,7 +32,7 @@
 		.header h1{float: left;}
 		.header a{display: inline block; float: right; color: #333; text-decoration: none;  margin: 24px;}
 		.header a:hover{color: #1dbbee;}
-		.content{margin: 24px; }
+		.content{}
 		.widget-container{}
 	</style>
 	
@@ -51,20 +51,9 @@
   
 </head>
 <body>
-	<header class='header'>
-		<h1>Widget in a non AngularJS website</h1>
-		<a href='https://www.smartdatanet.it/' target='_blank'>Smartdatanet.it</a>
-		<a href='https://userportal.smartdatanet.it/reference/#/widget' target='_blank'>Documentation</a>
-	</header>
 	<div ng-app="myApp" class='content'>
 		<div ng-controller="myCtrl">
-			
-			<div class='widget-container'>
-				<h4>Ipotesi business per year (EUR)</h4>
-				<p>The attribute of the widget are directly write in the html<p>
-<select ng-change="update(x);" ng-model="x">
-<option ng-repeat="x in years">{{x}}</option>
-</select>				
+			<div class='widget-container'>		
   <ng-yucca-dataset-choropleth-map 
     widget_title='Ipotesi business per year (EUR)' 
     tenant_code='sandbox' 
@@ -72,7 +61,96 @@
     geojson_url='https://raw.githubusercontent.com/raykyri/world.geo.json/6944334d4402a7f934cd87a7ac6610098c6a98aa/countries.geo.json'
     geojson_areas_key='name' 
     dataset_areas_key_column='Cod' 
-    dataset_areas_value_column='Vi2017' 
+    dataset_areas_value_column='Busyear' 
+    dataset_areas_color_column='Group' 
+    area_base_color='#AA2200' 
+    counting_mode='sum' 
+    skip_zero_values='true' 
+    dataset_areas_values_label='Ipotesi business per year (EUR)' 
+    debug='true' 
+	euro_value='true'
+   />
+			</div>
+			<div class='widget-container'>		
+  <ng-yucca-dataset-choropleth-map 
+    widget_title='Ipotesi business per year 2017(EUR)' 
+    tenant_code='sandbox' 
+    dataset_code='Provageo2_2176' 
+    geojson_url='https://raw.githubusercontent.com/raykyri/world.geo.json/6944334d4402a7f934cd87a7ac6610098c6a98aa/countries.geo.json'
+    geojson_areas_key='name' 
+    dataset_areas_key_column='Cod' 
+    dataset_areas_value_column='Bus2017' 
+    dataset_areas_color_column='Group' 
+    area_base_color='#AA2200' 
+    counting_mode='sum' 
+    skip_zero_values='true' 
+    dataset_areas_values_label='Ipotesi business per year (EUR)' 
+    debug='true' 
+	euro_value='true'
+   />
+			</div>
+			<div class='widget-container'>		
+  <ng-yucca-dataset-choropleth-map 
+    widget_title='Ipotesi business per year 2018(EUR)' 
+    tenant_code='sandbox' 
+    dataset_code='Provageo2_2176' 
+    geojson_url='https://raw.githubusercontent.com/raykyri/world.geo.json/6944334d4402a7f934cd87a7ac6610098c6a98aa/countries.geo.json'
+    geojson_areas_key='name' 
+    dataset_areas_key_column='Cod' 
+    dataset_areas_value_column='Bus2018' 
+    dataset_areas_color_column='Group' 
+    area_base_color='#AA2200' 
+    counting_mode='sum' 
+    skip_zero_values='true' 
+    dataset_areas_values_label='Ipotesi business per year (EUR)' 
+    debug='true' 
+	euro_value='true'
+   />
+			</div>
+			<div class='widget-container'>		
+  <ng-yucca-dataset-choropleth-map 
+    widget_title='Ipotesi business per year 2019(EUR)' 
+    tenant_code='sandbox' 
+    dataset_code='Provageo2_2176' 
+    geojson_url='https://raw.githubusercontent.com/raykyri/world.geo.json/6944334d4402a7f934cd87a7ac6610098c6a98aa/countries.geo.json'
+    geojson_areas_key='name' 
+    dataset_areas_key_column='Cod' 
+    dataset_areas_value_column='Bus2019' 
+    dataset_areas_color_column='Group' 
+    area_base_color='#AA2200' 
+    counting_mode='sum' 
+    skip_zero_values='true' 
+    dataset_areas_values_label='Ipotesi business per year (EUR)' 
+    debug='true' 
+	euro_value='true'
+   />
+			</div>
+			<div class='widget-container'>		
+  <ng-yucca-dataset-choropleth-map 
+    widget_title='Ipotesi business per year 2020(EUR)' 
+    tenant_code='sandbox' 
+    dataset_code='Provageo2_2176' 
+    geojson_url='https://raw.githubusercontent.com/raykyri/world.geo.json/6944334d4402a7f934cd87a7ac6610098c6a98aa/countries.geo.json'
+    geojson_areas_key='name' 
+    dataset_areas_key_column='Cod' 
+    dataset_areas_value_column='Bus2020' 
+    dataset_areas_color_column='Group' 
+    area_base_color='#AA2200' 
+    counting_mode='sum' 
+    skip_zero_values='true' 
+    dataset_areas_values_label='Ipotesi business per year (EUR)' 
+    debug='true' 
+	euro_value='true'
+   />
+			</div><div class='widget-container'>		
+  <ng-yucca-dataset-choropleth-map 
+    widget_title='Ipotesi business per year 2021(EUR)' 
+    tenant_code='sandbox' 
+    dataset_code='Provageo2_2176' 
+    geojson_url='https://raw.githubusercontent.com/raykyri/world.geo.json/6944334d4402a7f934cd87a7ac6610098c6a98aa/countries.geo.json'
+    geojson_areas_key='name' 
+    dataset_areas_key_column='Cod' 
+    dataset_areas_value_column='Bus2021' 
     dataset_areas_color_column='Group' 
     area_base_color='#AA2200' 
     counting_mode='sum' 
